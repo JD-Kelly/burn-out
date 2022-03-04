@@ -1,6 +1,6 @@
 import { useState } from "react";
 import './App.css';
-import Header from "./Components/Header"
+import Questionnaire from "./Components/Questionnaire"
 
 function App() {
   const [questionnaireStarted, setQuestionnaireStarted]=useState(false)
@@ -10,11 +10,21 @@ function App() {
     setQuestionnaireStarted(true)
   }
 
-  return (
-    <div className="App">
-      <Header handleSubmit={handleSubmit} questionnaireStarted={questionnaireStarted}/>
-    </div>
-  );
+  if(questionnaireStarted === true) {
+    return (
+      <div className="App">
+        <h1>{<Questionnaire />}</h1>
+      </div>
+    )
+   } else {
+     return (
+       <div className="App">
+         <h1>Welcome to Burnout</h1>
+         <button onClick={handleSubmit}>Start Questionnaire</button>
+       </div>
+     )
+   }
 }
+
 
 export default App;
