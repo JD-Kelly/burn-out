@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Exhaustion } from '../data'
+import Result from "./Result";
 
-const Questionnaire = () => {
+const Questionnaire = ( { setQuestionnaireFinished, questionnaireFinished} ) => {
   const [score, setScore]=useState([])
   const [answer, setAnswer]=useState("")
   const [questionNumber, setQuestionNumber]=useState(0)
@@ -13,8 +14,14 @@ const Questionnaire = () => {
 
   const handleOnClick = (e) => {
     e.preventDefault();
-    addScore();
-    nextQuestion();
+    if(questionNumber <= Exhaustion.length -2) {
+      addScore();
+      console.log(questionNumber)
+      console.log(Exhaustion.length)
+      nextQuestion();
+    } else if(questionNumber > Exhaustion.length -2) {
+      setQuestionnaireFinished(true)
+    }
   }
   
 
@@ -36,8 +43,9 @@ const Questionnaire = () => {
   const nextQuestion = () => {
     setQuestionNumber(questionNumber +1)
     console.log(Exhaustion[questionNumber].question)
-  }
-
+    }
+  
+if(questionnaireFinished === false) {
   return (
     <div>
         <h4>{Exhaustion[questionNumber].title}</h4>
@@ -56,7 +64,14 @@ const Questionnaire = () => {
         </form>
           <button onClick={handleOnClick}>Submit</button>
     </div>
-  
-  )}
+  )
+} else if (questionnaireFinished === true) {
+  return (
+    <div>
+      <Result />
+    </div>
+  )
+}
+}
 
 export default Questionnaire
