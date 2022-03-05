@@ -4,15 +4,17 @@ import { Exhaustion } from '../data'
 const Questionnaire = () => {
   const [score, setScore]=useState([])
   const [answer, setAnswer]=useState("")
+  const [questionNumber, setQuestionNumber]=useState(0)
 
   
   const handleChange = (e) => {
     setAnswer(e.target.value);
   }
 
-  const handleSubmit = (e) => {
+  const handleOnClick = (e) => {
     e.preventDefault();
     addScore();
+    nextQuestion();
   }
   
 
@@ -30,10 +32,16 @@ const Questionnaire = () => {
     }
   }
 
+ 
+  const nextQuestion = () => {
+    setQuestionNumber(questionNumber +1)
+    console.log(Exhaustion[questionNumber].question)
+  }
 
   return (
-    <div>{Exhaustion[0].title}
-        <h4>{Exhaustion[0].question}</h4>
+    <div>
+        <h4>{Exhaustion[questionNumber].title}</h4>
+        <h4>{Exhaustion[questionNumber].question}</h4>
         <form>
           <input type='radio' name="answer" value="never" id="never" onChange={handleChange}></input>
           <label htmlFor="never">Never</label>
@@ -46,9 +54,7 @@ const Questionnaire = () => {
           <input type='radio' name="answer" value="always" id="always" onChange={handleChange}></input>
           <label htmlFor="always">Always</label>
         </form>
-        <h1>you answered: {answer}</h1>
-        <button onClick={handleSubmit}>Submit</button>
-        <h1>you scored: {score}</h1>
+          <button onClick={handleOnClick}>Submit</button>
     </div>
   
   )}
