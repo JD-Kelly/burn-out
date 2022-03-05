@@ -1,10 +1,11 @@
 import { useState } from "react";
 import './App.css';
-import Questionnaire from "./Components/Questionnaire"
+import Questionnaire from "./Components/Questionnaire";
 
 function App() {
   const [questionnaireStarted, setQuestionnaireStarted]=useState(false)
-
+  const [questionnaireFinished, setQuestionnaireFinished]=useState(false)
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     setQuestionnaireStarted(true)
@@ -13,7 +14,7 @@ function App() {
   if(questionnaireStarted === true) {
     return (
       <div className="App">
-        <h1>{<Questionnaire />}</h1>
+        <h1>{<Questionnaire setQuestionnaireFinished={setQuestionnaireFinished} setQuestionnaireStarted={setQuestionnaireStarted} questionnaireFinished={questionnaireFinished}/>}</h1>
       </div>
     )
    } else {
@@ -23,7 +24,7 @@ function App() {
          <button onClick={handleSubmit}>Start Questionnaire</button>
        </div>
      )
-   }
+   } 
 }
 
 
