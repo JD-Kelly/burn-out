@@ -9,17 +9,18 @@ const Questionnaire = ( { setQuestionnaireFinished, questionnaireFinished} ) => 
 
   
   const handleChange = (e) => {
+    console.log(answer)
     setAnswer(e.target.value);
+    
   }
 
   const handleOnClick = (e) => {
     e.preventDefault();
     if(questionNumber <= Exhaustion.length -2) {
       addScore();
-      console.log(questionNumber)
-      console.log(Exhaustion.length)
       nextQuestion();
     } else if(questionNumber > Exhaustion.length -2) {
+      addScore();
       setQuestionnaireFinished(true)
     }
   }
@@ -50,16 +51,17 @@ if(questionnaireFinished === false) {
     <div>
         <h4>{Exhaustion[questionNumber].title}</h4>
         <h4>{Exhaustion[questionNumber].question}</h4>
-        <form>
-          <input type='radio' name="answer" value="never" id="never" onChange={handleChange}></input>
+        <h1>{ score }</h1>
+        <form onChange={handleChange}>
+          <input type='radio' name="answer" value="never" id="never" ></input>
           <label htmlFor="never">Never</label>
-          <input type='radio' name="answer" value="rarely" id="rarely" onChange={handleChange}></input>
+          <input type='radio' name="answer" value="rarely" id="rarely"></input>
           <label htmlFor="rarely">Rarely</label>
-          <input type='radio' name="answer" value="sometimes" id="sometimes" onChange={handleChange}></input>
+          <input type='radio' name="answer" value="sometimes" id="sometimes"></input>
           <label htmlFor="sometimes">Sometimes</label>
-          <input type='radio' name="answer" value="often" id="often" onChange={handleChange}></input>
+          <input type='radio' name="answer" value="often" id="often"></input>
           <label htmlFor="often">Often</label>
-          <input type='radio' name="answer" value="always" id="always" onChange={handleChange}></input>
+          <input type='radio' name="answer" value="always" id="always"></input>
           <label htmlFor="always">Always</label>
         </form>
           <button onClick={handleOnClick}>Submit</button>
@@ -68,7 +70,7 @@ if(questionnaireFinished === false) {
 } else if (questionnaireFinished === true) {
   return (
     <div>
-      <Result />
+      <Result score={ score }/>
     </div>
   )
 }
