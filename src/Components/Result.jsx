@@ -1,10 +1,11 @@
 import React from 'react';
 
-const Result = ({ score, setQuestionnaireStarted, setQuestionnaireFinished }) => {
+const Result = ({ score, setScore, setQuestionnaireStarted, setQuestionnaireFinished }) => {
 
   const sum = score.reduce((a, b) => a + b)
 
   const handleOnClick = () => {
+    setScore([])
     setQuestionnaireStarted(false)
     setQuestionnaireFinished(false)
   }
