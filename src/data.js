@@ -1,4 +1,4 @@
-export const Exhaustion = [
+export const Questions = [
   
   {
     title: "Question 1",

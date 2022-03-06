@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Exhaustion } from '../data'
+import { Questions } from '../data'
 import Result from "./Result";
 
 const Questionnaire = ({ setQuestionnaireFinished, questionnaireFinished, setQuestionnaireStarted}) => {
@@ -16,10 +16,10 @@ const Questionnaire = ({ setQuestionnaireFinished, questionnaireFinished, setQue
 
   const handleOnClick = (e) => {
     e.preventDefault();
-    if(questionNumber <= Exhaustion.length -2) {
+    if(questionNumber <= Questions.length -2) {
       addScore();
       nextQuestion();
-    } else if(questionNumber > Exhaustion.length -2) {
+    } else if(questionNumber > Questions.length -2) {
       addScore();
       setQuestionnaireFinished(true)
     }
@@ -43,14 +43,14 @@ const Questionnaire = ({ setQuestionnaireFinished, questionnaireFinished, setQue
  
   const nextQuestion = () => {
     setQuestionNumber(questionNumber +1)
-    console.log(Exhaustion[questionNumber].question)
+    console.log(Questions[questionNumber].question)
     }
   
 if(questionnaireFinished === false) {
   return (
     <div>
-        <h4>{Exhaustion[questionNumber].title}</h4>
-        <h4>{Exhaustion[questionNumber].question}</h4>
+        <h4>{Questions[questionNumber].title}</h4>
+        <h4>{Questions[questionNumber].question}</h4>
         <form onChange={handleChange}>
           <input type='radio' name="answer" value="never" id="never" ></input>
           <label htmlFor="never">Never</label>
@@ -69,7 +69,7 @@ if(questionnaireFinished === false) {
 } else if (questionnaireFinished === true) {
   return (
     <div>
-      <Result score={score} setQuestionnaireStarted={setQuestionnaireStarted} setQuestionnaireFinished={setQuestionnaireFinished}/>
+      <Result score={score} setScore={setScore} setQuestionnaireStarted={setQuestionnaireStarted} setQuestionnaireFinished={setQuestionnaireFinished}/>
     </div>
   )
 }
