@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Exhaustion } from '../data'
 import Result from "./Result";
 
-const Questionnaire = ( { setQuestionnaireFinished, questionnaireFinished} ) => {
+const Questionnaire = ({ setQuestionnaireFinished, questionnaireFinished, setQuestionnaireStarted}) => {
   const [score, setScore]=useState([])
   const [answer, setAnswer]=useState("")
   const [questionNumber, setQuestionNumber]=useState(0)
@@ -51,7 +51,6 @@ if(questionnaireFinished === false) {
     <div>
         <h4>{Exhaustion[questionNumber].title}</h4>
         <h4>{Exhaustion[questionNumber].question}</h4>
-        <h1>{ score }</h1>
         <form onChange={handleChange}>
           <input type='radio' name="answer" value="never" id="never" ></input>
           <label htmlFor="never">Never</label>
@@ -70,7 +69,7 @@ if(questionnaireFinished === false) {
 } else if (questionnaireFinished === true) {
   return (
     <div>
-      <Result score={ score }/>
+      <Result score={score} setQuestionnaireStarted={setQuestionnaireStarted} setQuestionnaireFinished={setQuestionnaireFinished}/>
     </div>
   )
 }
