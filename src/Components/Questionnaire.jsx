@@ -42,9 +42,13 @@ const Questionnaire = ({ setQuestionnaireFinished, questionnaireFinished, setQue
 
  
   const nextQuestion = () => {
+    if(answer === "") {
+      alert("Please add an answer before moving on to next question");
+    } else {
     setQuestionNumber(questionNumber +1)
     console.log(Questions[questionNumber].question)
     }
+  }
   
 if(questionnaireFinished === false) {
   return (
