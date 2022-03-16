@@ -2,7 +2,10 @@ import React from 'react';
 
 const Result = ({ score, setScore, setQuestionnaireStarted, setQuestionnaireFinished }) => {
 
-  const sum = score.reduce((a, b) => a + b)
+  const sum = score.reduce((a, b) => {
+    const totalSum = a + b / 23
+    return Math.round(totalSum * 100) / 100
+  })
 
   const handleOnClick = () => {
     setScore([])
