@@ -14,7 +14,12 @@ function App() {
   if(questionnaireStarted === true) {
     return (
       <div className="App">
-        <h1>{<Questionnaire setQuestionnaireFinished={setQuestionnaireFinished} setQuestionnaireStarted={setQuestionnaireStarted} questionnaireFinished={questionnaireFinished}/>}</h1>
+        <h1>
+        {<Questionnaire 
+        setQuestionnaireFinished={setQuestionnaireFinished} 
+        setQuestionnaireStarted={setQuestionnaireStarted} 
+        questionnaireFinished={questionnaireFinished} />}
+        </h1>
       </div>
     )
    } else {

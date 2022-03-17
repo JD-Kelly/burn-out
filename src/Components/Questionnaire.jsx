@@ -88,7 +88,6 @@ if(questionnaireFinished === false) {
   return (
     <div>
       <Result 
-      score={score} 
       setScore={setScore} 
       setQuestionnaireStarted={setQuestionnaireStarted} 
       setQuestionnaireFinished={setQuestionnaireFinished}
