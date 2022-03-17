@@ -1,5 +1,4 @@
 export const Questions = [
-  
   {
     title: "Question 1",
     question: "At work, I feel mentally exhausted"

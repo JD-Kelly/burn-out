@@ -1,11 +1,5 @@
-import React from 'react';
+const Result = ({ score, setScore, setQuestionnaireStarted, setQuestionnaireFinished, exhaustion, mentalDistance, cogntiveImpairement, emotionalImpairement }) => {
 
-const Result = ({ score, setScore, setQuestionnaireStarted, setQuestionnaireFinished }) => {
-
-  const sum = score.reduce((a, b) => {
-    const totalSum = a + b / 23
-    return Math.round(totalSum * 100) / 100
-  })
 
   const handleOnClick = () => {
     setScore([])
@@ -13,18 +7,31 @@ const Result = ({ score, setScore, setQuestionnaireStarted, setQuestionnaireFini
     setQuestionnaireFinished(false)
   }
 
+  const totalScore = () => {
+    const finalScore = (exhaustion + mentalDistance + cogntiveImpairement + emotionalImpairement) / 23
+    return Math.round(finalScore * 100) / 100
+  }
+
   return (
     <div>Your Results
-      <h3>{sum}</h3>
+      <h3>{exhaustion}</h3>
+      <h3>{mentalDistance}</h3>
+      <h3>{cogntiveImpairement}</h3>
+      <h3>{emotionalImpairement}</h3>
+      <h3>{totalScore()}</h3>
+
       <button onClick={handleOnClick}>Restart Questionnaire</button>
       <h3>
-        Scored 8-13 : Low to no risk of burnout
+        Scored equal to or less than 1.60 : Low risk of burnout
       </h3>
       <h3>
-        Scored 14-26 : Moderate risk of burnout 
+        Scored between 1.61 – 2.40 : Moderate risk of burnout 
       </h3>
       <h3>
-        Scored 27-40 : Moderate to high risk of burnout
+        Scored between 2.41– 3.29 : High risk of burnout
+      </h3>
+      <h3>
+        Scored equal to or greater than 3.30 : Very high risk of burnout
       </h3>
     </div>
   )

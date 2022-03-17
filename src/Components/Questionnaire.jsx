@@ -6,28 +6,26 @@ const Questionnaire = ({ setQuestionnaireFinished, questionnaireFinished, setQue
   const [score, setScore]=useState([])
   const [answer, setAnswer]=useState("")
   const [questionNumber, setQuestionNumber]=useState(0)
-
+  const [exhaustion, setExhaustion] = useState(0)
+  const [mentalDistance, setMentalDistance]=useState(0)
+  const [cogntiveImpairement, setCogntiveImpairement]=useState(0)
+  const [emotionalImpairement, setEmotionalImpairement]=useState(0)
+  
+  const calc = (list, i1, i2) => {
+    let result = 0;
+    list.slice(i1, (i2 + 1)).forEach(element => {
+        result += element;
+    });
+    return result;
+  }
   
   const handleChange = (e) => {
-    console.log(answer)
     setAnswer(e.target.value);
-    
-  }
-
-  const handleOnClick = (e) => {
-    e.preventDefault();
-    if(questionNumber <= Questions.length -2) {
-      addScore();
-      nextQuestion();
-    } else if(questionNumber > Questions.length -2) {
-      addScore();
-      setQuestionnaireFinished(true)
-    }
   }
   
 
   const addScore = () => {
-    if(answer === 'never') {
+   if(answer === 'never') {
       setScore((prevVals) => [...prevVals, 1]);
     } else if (answer === 'rarely') {
       setScore((prevVals) => [...prevVals, 2]);
@@ -35,7 +33,7 @@ const Questionnaire = ({ setQuestionnaireFinished, questionnaireFinished, setQue
       setScore((prevVals) => [...prevVals, 3]);
     } else if (answer === 'often') {
       setScore((prevVals) => [...prevVals, 4]);
-    } else {
+    } else if (answer === 'always') {
       setScore((prevVals) => [...prevVals, 5]);
     }
   }
@@ -46,7 +44,23 @@ const Questionnaire = ({ setQuestionnaireFinished, questionnaireFinished, setQue
       alert("Please add an answer before moving on to next question");
     } else {
     setQuestionNumber(questionNumber +1)
-    console.log(Questions[questionNumber].question)
+    console.log(score)
+    }
+  }
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    if(questionNumber <= Questions.length -2) {
+      addScore();
+      nextQuestion()
+      console.log(score)
+    } else if(questionNumber > Questions.length -2) {
+      addScore();
+      setQuestionnaireFinished(true)
+      setExhaustion(calc(score, 0, 7))
+      setMentalDistance(calc(score, 8, 12))
+      setCogntiveImpairement(calc(score, 13, 17))
+      setEmotionalImpairement(calc(score, 18, 22))
     }
   }
   
@@ -67,13 +81,22 @@ if(questionnaireFinished === false) {
           <input type='radio' name="answer" value="always" id="always"></input>
           <label htmlFor="always">Always</label>
         </form>
-          <button onClick={handleOnClick}>Submit</button>
+          <button onClick={handleOnSubmit}>Submit</button>
     </div>
   )
 } else if (questionnaireFinished === true) {
   return (
     <div>
-      <Result score={score} setScore={setScore} setQuestionnaireStarted={setQuestionnaireStarted} setQuestionnaireFinished={setQuestionnaireFinished}/>
+      <Result 
+      score={score} 
+      setScore={setScore} 
+      setQuestionnaireStarted={setQuestionnaireStarted} 
+      setQuestionnaireFinished={setQuestionnaireFinished}
+      exhaustion={exhaustion}
+      mentalDistance={mentalDistance}
+      cogntiveImpairement={cogntiveImpairement}
+      emotionalImpairement={emotionalImpairement}
+      />
     </div>
   )
 }
